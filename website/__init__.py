@@ -8,6 +8,6 @@ def createApp():
     from .camera import webcam
 
     app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(webcam, url_prefix='/webcam')
+    app.register_blueprint(webcam, url_prefix='/webcam/')
 
     return app
