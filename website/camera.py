@@ -1,5 +1,5 @@
 from threading import Timer
-from flask import Blueprint, Flask, render_template, Response, request
+from flask import Blueprint, render_template, Response
 import cv2
 import time
 
