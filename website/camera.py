@@ -3,6 +3,8 @@ from flask import Blueprint, render_template, Response
 import cv2
 import time
 
+from website.webcam import VideoCamera
+
 global img_counter
 img_counter = 0
  
@@ -24,27 +26,13 @@ def capture():
     cv2.imwrite(img_name, cv2.flip(frame,1))
     img_counter +=1
 
-def gen_frames():
-    static_frame = None
+def gen(camera):
     while True:
-        success, frame = camera.read() 
-        if success:
-            ret, buffer = cv2.imencode('.jpg', cv2.flip(frame,1))
-            if not static_frame:
-                frame = buffer.tobytes()
-            else:
-                frame = static_frame 
+        data= camera.get_frame()
 
-            # ------ problem ------- #
-            #if count(3):
-             #   capture()
-              #  static_frame = frame
-
-            # Issue: webcam stops working the frame just becomes a static frame
-            # Goal: Webcam works for 3 secs then becomes a static image when the image is captured  
-
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        frame=data[0]
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 @webcam.route('/')
 def home():
@@ -53,7 +41,7 @@ def home():
 # Generates a Response so that html can use it as a img src
 @webcam.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame') # "multipart/x-mixed-replace" response type that expects multiple frames
+    return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame') # "multipart/x-mixed-replace" response type that expects multiple frames
 
 camera.release()
 cv2.destroyAllWindows()
