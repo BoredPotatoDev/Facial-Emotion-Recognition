@@ -6,6 +6,6 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET','POST'])
 def home():
     if request.method == 'POST':
-        return redirect(url_for('webcam.home'))
+        return redirect(url_for('webcam.main'))
 
     return render_template("index.html")
