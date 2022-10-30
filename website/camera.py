@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, Response
+from flask import Blueprint, redirect, render_template, Response, url_for
 import cv2
 import time
 
 from website.webcam import VideoCamera
 
-global img_counter
+global img_counter, taken
+taken = True
 img_counter = 0
  
 webcam = Blueprint('webcam', __name__, template_folder="./templates")
@@ -18,12 +19,15 @@ def count(TIMER):
             prev = cur 
             TIMER -= 1
 
-def capture(camera):
+def capture():
+    cam = cv2.VideoCapture(0)
     global img_counter
-    ret,frame = camera.read() 
+    ret,frame = cam.read() 
     img_name = f"Capture{img_counter}.png"
     cv2.imwrite(img_name, cv2.flip(frame,1))
+    print("{} written!".format(img_name))
     img_counter +=1
+
 
 def gen(camera):
     while True:
@@ -36,6 +40,7 @@ def gen(camera):
 @webcam.route('/')
 def main():
     return render_template('camera.html')
+
 
 # Generates a Response so that html can use it as a img src
 @webcam.route('/video_feed')

@@ -6,6 +6,9 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET','POST'])
 def home():
     if request.method == 'POST':
+        age = request.form.get('age')
+        gender = request.form.get('gender')
+        print(age)
         return redirect(url_for('webcam.main'))
 
     return render_template("index.html")

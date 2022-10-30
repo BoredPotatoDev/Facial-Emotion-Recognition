@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Simple Login Form Example</title>
+  <title>Home</title>
   <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Rubik:400,700">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
@@ -17,7 +17,9 @@
     <div class="form-group">
       <div class="input-field">
         <input type="text" 
-               inputmode="numeric" 
+               inputmode="numeric"
+               id="age"
+               name="age" 
                placeholder="Enter your Age"
                maxlength="2" >
       </div>
@@ -25,9 +27,17 @@
 
     <h3 align="center">What's your Gender</h3><br>
 
-    <div class="Gender">
-    <button type="button"><img src="{{ url_for('static', filename='assets/Male.png') }}" height="100%" width="30%"></button>
-    <button type="button"><img src="{{ url_for('static', filename='assets/Female.png') }}" height="100%" width="30%"></button><br>
+    <div class="Gender" id="gender">
+    <button type="button" 
+            class="M"
+            id="M"
+            name="M">
+            <img src="{{ url_for('static', filename='assets/Male.png') }}" height="100%" width="30%"></button>
+
+    <button type="button" 
+            class="F"
+            id="F"
+            name="F"><img src="{{ url_for('static', filename='assets/Female.png') }}" height="100%" width="30%"></button><br>
     </div>
 
     <div class="action">
