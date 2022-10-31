@@ -39,7 +39,7 @@ def gen(camera):
 
 @webcam.route('/')
 def main():
-    return render_template('camera.html')
+    return render_template('camera.html'), {"Refresh": "5; url=http://127.0.0.1:5000/emotions/"}
 
 
 # Generates a Response so that html can use it as a img src

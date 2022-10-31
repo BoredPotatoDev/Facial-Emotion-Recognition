@@ -15,12 +15,7 @@ suprised = "suprised.html"
 
 emotions = Blueprint('emotions', __name__)
 
-@emotions.route('/')
+@emotions.route('/', methods=['GET'])
 def home():
-    global change
-
-    if change == False:
-        RandomEmotion = random.choice([angry,disgust,fear,happy,neutral,sad,suprised])
-        return render_template(RandomEmotion)
-    else:
-        return redirect(url_for('webcam.main'))
+    RandomEmotion = random.choice([angry,disgust,fear,happy,neutral,sad,suprised])
+    return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
