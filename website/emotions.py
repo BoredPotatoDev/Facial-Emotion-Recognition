@@ -12,7 +12,7 @@ neutral = "neutral.html"
 sad = "sad.html"
 suprised = "suprised.html"
 
-emotions = Blueprint('emotions', __name__)
+emotions = Blueprint('emotions', __name__, template_folder='./templates/emotion_templates')
 
 Emotion = [angry,disgust,fear,happy,neutral,sad,suprised]
 
