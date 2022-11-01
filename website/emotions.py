@@ -1,9 +1,8 @@
+from ast import Global
+from os import remove
 from flask import Blueprint, redirect, render_template, url_for
 import random
 from .camera import count
-
-global change
-change = False
 
 angry = "angry.html"
 disgust = "disgust.html"
@@ -15,7 +14,97 @@ suprised = "suprised.html"
 
 emotions = Blueprint('emotions', __name__)
 
+Emotion = [angry,disgust,fear,happy,neutral,sad,suprised]
+
+global AngryCount, DisgustCount, FearCount, HappyCount, NeutralCount, SadCount, SuprisedCount
+AngryCount = 0
+DisgustCount = 0
+FearCount = 0
+HappyCount = 0
+NeutralCount = 0
+SadCount = 0
+SuprisedCount = 0
+
 @emotions.route('/', methods=['GET'])
 def home():
-    RandomEmotion = random.choice([angry,disgust,fear,happy,neutral,sad,suprised])
-    return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+    global AngryCount, DisgustCount, FearCount, HappyCount, NeutralCount, SadCount, SuprisedCount
+
+    RandomEmotion = random.choice(Emotion)
+
+    if RandomEmotion == angry:
+        if AngryCount <= 1:
+            AngryCount += 1
+            print(AngryCount)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+            
+        else:
+            Emotion.remove(angry)
+            RandomEmotion = random.choice(Emotion)
+            print(Emotion)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+
+    if RandomEmotion == disgust:
+        if DisgustCount <= 1:
+            DisgustCount += 1
+            print(DisgustCount)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+        else:
+            Emotion.remove(disgust)
+            RandomEmotion = random.choice(Emotion)
+            print(Emotion)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+
+    if RandomEmotion == fear:
+        if FearCount <= 1:
+            FearCount += 1
+            print(FearCount)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+        else:
+            Emotion.remove(fear)
+            RandomEmotion = random.choice(Emotion)
+            print(Emotion)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+
+    if RandomEmotion == happy:
+        if HappyCount <= 1:
+            HappyCount += 1
+            print(HappyCount)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+        else:
+            Emotion.remove(happy)
+            RandomEmotion = random.choice(Emotion)
+            print(Emotion)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+
+    if RandomEmotion == neutral:
+        if NeutralCount <= 1:
+            NeutralCount += 1
+            print(NeutralCount)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+        else:
+            Emotion.remove(neutral)
+            RandomEmotion = random.choice(Emotion)
+            print(Emotion)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+
+    if RandomEmotion == sad:
+        if SadCount <= 1:
+            SadCount += 1
+            print(SadCount)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+        else:
+            Emotion.remove(sad)
+            RandomEmotion = random.choice(Emotion)
+            print(Emotion)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+
+    if RandomEmotion == suprised:
+        if SuprisedCount <= 1:
+            SuprisedCount += 1
+            print(SuprisedCount)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
+        else:
+            Emotion.remove(suprised)
+            RandomEmotion = random.choice(Emotion)
+            print(Emotion)
+            return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
