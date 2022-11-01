@@ -1,4 +1,3 @@
-from ast import Global
 from os import remove
 from flask import Blueprint, redirect, render_template, url_for
 import random
@@ -34,7 +33,6 @@ def home():
     if RandomEmotion == angry:
         if AngryCount <= 1:
             AngryCount += 1
-            print(AngryCount)
             return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
             
         else:
@@ -46,7 +44,6 @@ def home():
     if RandomEmotion == disgust:
         if DisgustCount <= 1:
             DisgustCount += 1
-            print(DisgustCount)
             return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
         else:
             Emotion.remove(disgust)
@@ -57,7 +54,6 @@ def home():
     if RandomEmotion == fear:
         if FearCount <= 1:
             FearCount += 1
-            print(FearCount)
             return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
         else:
             Emotion.remove(fear)
@@ -68,7 +64,6 @@ def home():
     if RandomEmotion == happy:
         if HappyCount <= 1:
             HappyCount += 1
-            print(HappyCount)
             return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
         else:
             Emotion.remove(happy)
@@ -79,7 +74,6 @@ def home():
     if RandomEmotion == neutral:
         if NeutralCount <= 1:
             NeutralCount += 1
-            print(NeutralCount)
             return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
         else:
             Emotion.remove(neutral)
@@ -90,7 +84,6 @@ def home():
     if RandomEmotion == sad:
         if SadCount <= 1:
             SadCount += 1
-            print(SadCount)
             return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
         else:
             Emotion.remove(sad)
@@ -101,7 +94,6 @@ def home():
     if RandomEmotion == suprised:
         if SuprisedCount <= 1:
             SuprisedCount += 1
-            print(SuprisedCount)
             return render_template(RandomEmotion), {"Refresh": "3; url=http://127.0.0.1:5000/webcam/"}
         else:
             Emotion.remove(suprised)
